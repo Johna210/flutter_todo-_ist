@@ -11,7 +11,7 @@ class StartScreen extends StatelessWidget {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (ctx) => const TodoList(),
+        builder: (ctx) => TodoList(),
       ),
     );
   }
