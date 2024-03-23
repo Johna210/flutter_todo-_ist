@@ -47,7 +47,7 @@ class TodoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppbar,
+      appBar: customAppbar(context),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(10.0),

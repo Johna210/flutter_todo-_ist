@@ -9,7 +9,7 @@ class AddTodoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppbar,
+      appBar: customAppbar(context),
       backgroundColor: Colors.white,
       body: const AddTaskWidget(),
     );
