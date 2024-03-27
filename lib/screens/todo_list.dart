@@ -4,26 +4,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_list/screens/add_todo.dart';
 
 import 'package:todo_list/widgets/custom_app_bar.dart';
-import 'package:todo_list/widgets/task_list.dart';
+import 'package:todo_list/widgets/task_item.dart';
 import 'package:todo_list/models/task.dart';
 
-class TodoList extends StatelessWidget {
-  TodoList({super.key});
+class TodoList extends StatefulWidget {
+  const TodoList({super.key});
 
-  void _createTask(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (ctx) => const AddTodoScreen(),
-      ),
-    );
-  }
+  @override
+  State<TodoList> createState() => _TodoListState();
+}
 
-  void _addTask(Task newTask) {
-    myTodoList.add(newTask);
-  }
-
-  final List<Task> myTodoList = [
+class _TodoListState extends State<TodoList> {
+  final List<Task> tasks = [
     Task(
       taskName: 'LeetCode',
       taskDescription: 'Do 5 leetcode questions',
@@ -43,6 +35,22 @@ class TodoList extends StatelessWidget {
       taskColor: Colors.green,
     ),
   ];
+  void _createTask(BuildContext context) async {
+    final Task? newTask = await Navigator.push<Task?>(
+      context,
+      MaterialPageRoute<Task?>(
+        builder: (ctx) => const AddTodoScreen(),
+      ),
+    );
+
+    _addTask(newTask as Task);
+  }
+
+  void _addTask(Task task) {
+    setState(() {
+      tasks.add(task);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +73,10 @@ class TodoList extends StatelessWidget {
                   GoogleFonts.itim(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Expanded(
-              child: TaskList(tasks: myTodoList),
+              child: ListView.builder(
+                itemCount: tasks.length,
+                itemBuilder: (ctx, index) => TaskItem(tasks[index]),
+              ),
             ),
             ElevatedButton(
               onPressed: () {

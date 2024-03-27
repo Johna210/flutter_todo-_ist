@@ -16,7 +16,7 @@ class AddTaskWidget extends StatefulWidget {
 
 class _AddTaskWidgetState extends State<AddTaskWidget> {
   DateTime? _selectedDate;
-  TaskColors _selectedColor = TaskColors.red;
+  String _selectedColor = "RED";
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
 
@@ -79,7 +79,8 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
       dueDate: _selectedDate!,
       taskColor: _selectColor(_selectedColor),
     );
-    Navigator.pop(context);
+
+    Navigator.pop(context, newTask);
   }
 
   @override
@@ -154,20 +155,20 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                           items: TaskColors.values
                               .map(
                                 (taskColor) => DropdownMenuItem(
-                                  value: taskColor,
+                                  value: taskColor.name.toUpperCase(),
                                   child: Text(
                                     taskColor.name.toUpperCase(),
+                                    style: const TextStyle(color: Colors.red),
                                   ),
                                 ),
                               )
                               .toList(),
                           onChanged: (value) {
-                            setState(() {
-                              if (value == null) {
-                                return;
-                              }
-                              _selectedColor = value;
-                            });
+                            setState(
+                              () {
+                                _selectedColor = value!;
+                              },
+                            );
                           },
                         ),
                       ],

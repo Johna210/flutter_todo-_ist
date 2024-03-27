@@ -35,8 +35,13 @@ final theme = ThemeData(
   cardTheme: const CardTheme().copyWith(
     color: kColorScheme.secondaryContainer,
   ),
-  dropdownMenuTheme: DropdownMenuThemeData(
+  dropdownMenuTheme: const DropdownMenuThemeData().copyWith(
     textStyle: TextStyle(color: kColorScheme.primary, fontSize: 20),
+    menuStyle: MenuStyle(
+      backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white),
+      surfaceTintColor:
+          MaterialStateColor.resolveWith((states) => Colors.white),
+    ),
   ),
 );
 
