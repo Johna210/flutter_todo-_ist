@@ -52,6 +52,29 @@ class _TodoListState extends State<TodoList> {
     });
   }
 
+  void _removeTask(Task task) {
+    final int _removedIndex = tasks.indexOf(task);
+
+    setState(() {
+      tasks.remove(task);
+    });
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 5),
+        content: const Text('Task removed'),
+        action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {
+              setState(() {
+                tasks.insert(_removedIndex, task);
+              });
+            }),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +98,18 @@ class _TodoListState extends State<TodoList> {
             Expanded(
               child: ListView.builder(
                 itemCount: tasks.length,
-                itemBuilder: (ctx, index) => TaskItem(tasks[index]),
+                itemBuilder: (ctx, index) => Dismissible(
+                  key: ValueKey(tasks[index]),
+                  background: Container(
+                    height: Theme.of(context).cardTheme!.elevation,
+                    color: Theme.of(context).colorScheme.error,
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                  ),
+                  onDismissed: (direction) {
+                    _removeTask(tasks[index]);
+                  },
+                  child: TaskItem(tasks[index]),
+                ),
               ),
             ),
             ElevatedButton(

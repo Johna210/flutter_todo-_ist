@@ -92,116 +92,116 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (_selectedDate == null) {}
-
-    return Column(
-      children: [
-        const Text(
-          'Create a New Task',
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-        ),
-        const Divider(),
-        Container(
-          padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
-          child: Column(
-            children: [
-              TaskInput(
-                title: 'Main Task title',
-                input: _titleController,
-                lines: 1,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Due date',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(241, 0, 100, 177),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(_selectedDate == null
-                          ? 'no date selected'
-                          : formatter.format(_selectedDate!)),
-                    ],
-                  ),
-                  IconButton(
-                    onPressed: _presentDatePicker,
-                    icon: const Icon(Icons.calendar_month),
-                  ),
-                  Expanded(
-                    child: Column(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const Text(
+            'Create a New Task',
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          ),
+          const Divider(),
+          Container(
+            padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
+            child: Column(
+              children: [
+                TaskInput(
+                  title: 'Main Task title',
+                  input: _titleController,
+                  lines: 1,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          'Select task color',
+                          'Due date',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Color.fromARGB(241, 0, 100, 177),
                           ),
                         ),
-                        DropdownButton(
-                          value: _selectedColor,
-                          items: TaskColors.values
-                              .map(
-                                (taskColor) => DropdownMenuItem(
-                                  value: taskColor.name.toUpperCase(),
-                                  child: Text(
-                                    taskColor.name.toUpperCase(),
-                                    style: const TextStyle(color: Colors.red),
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                          onChanged: (value) {
-                            setState(
-                              () {
-                                _selectedColor = value!;
-                              },
-                            );
-                          },
+                        const SizedBox(
+                          height: 10,
                         ),
+                        Text(_selectedDate == null
+                            ? 'no date selected'
+                            : formatter.format(_selectedDate!)),
                       ],
                     ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TaskInput(
-                title: 'Description',
-                lines: 5,
-                input: _descriptionController,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: _addNewTask,
-                style: TextButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                    IconButton(
+                      onPressed: _presentDatePicker,
+                      icon: const Icon(Icons.calendar_month),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          const Text(
+                            'Select task color',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(241, 0, 100, 177),
+                            ),
+                          ),
+                          DropdownButton(
+                            value: _selectedColor,
+                            items: TaskColors.values
+                                .map(
+                                  (taskColor) => DropdownMenuItem(
+                                    value: taskColor.name.toUpperCase(),
+                                    child: Text(
+                                      taskColor.name.toUpperCase(),
+                                      style: const TextStyle(color: Colors.red),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (value) {
+                              setState(
+                                () {
+                                  _selectedColor = value!;
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
-                child: const Text(
-                  'Add task',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                const SizedBox(
+                  height: 20,
                 ),
-              )
-            ],
-          ),
-        )
-      ],
+                TaskInput(
+                  title: 'Description',
+                  lines: 5,
+                  input: _descriptionController,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  onPressed: _addNewTask,
+                  style: TextButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  child: const Text(
+                    'Add task',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
