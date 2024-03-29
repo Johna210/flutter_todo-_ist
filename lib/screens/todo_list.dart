@@ -43,7 +43,9 @@ class _TodoListState extends State<TodoList> {
       ),
     );
 
-    _addTask(newTask as Task);
+    if (newTask != null) {
+      _addTask(newTask as Task);
+    }
   }
 
   void _addTask(Task task) {

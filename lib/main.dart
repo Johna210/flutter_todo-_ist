@@ -15,7 +15,7 @@ final theme = ThemeData(
     primary: const Color.fromARGB(241, 0, 100, 177),
     onPrimary: const Color.fromARGB(247, 240, 248, 255),
   ),
-  textTheme: GoogleFonts.itimTextTheme(),
+  textTheme: GoogleFonts.latoTextTheme(),
   dividerTheme: const DividerThemeData(
     color: Color.fromARGB(255, 194, 191, 191),
   ),
@@ -46,6 +46,7 @@ final theme = ThemeData(
 );
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MaterialApp(
       theme: theme,
