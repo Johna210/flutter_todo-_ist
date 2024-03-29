@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,11 +26,11 @@ class StartScreen extends StatelessWidget {
         children: [
           Image.asset('assets/images/todo-list-logo.png'),
           // const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 50),
             child: Text(
               'My Todo-List',
-              style: GoogleFonts.itim(
+              style: TextStyle(
                 color: Colors.white,
                 fontSize: 40,
                 fontWeight: FontWeight.bold,

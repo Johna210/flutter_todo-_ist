@@ -42,7 +42,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
     } else if (type == 'BLUE') {
       return Colors.blue;
     } else if (type == 'GREEN') {
-      return Colors.blue;
+      return Colors.green;
     } else if (type == 'YELLOW') {
       return Colors.yellow;
     } else {
@@ -151,13 +151,19 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                           ),
                           DropdownButton(
                             value: _selectedColor,
+                            dropdownColor:
+                                const Color.fromARGB(255, 227, 241, 248),
                             items: TaskColors.values
                                 .map(
                                   (taskColor) => DropdownMenuItem(
                                     value: taskColor.name.toUpperCase(),
                                     child: Text(
                                       taskColor.name.toUpperCase(),
-                                      style: const TextStyle(color: Colors.red),
+                                      style: TextStyle(
+                                        color: _selectColor(
+                                          taskColor.name.toUpperCase(),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 )
